@@ -1,0 +1,12 @@
+Logged in as <strong><%= current_user.email %></strong>.
+ <%= link_to 'Edit profile', edit_user_registration_path %> |
+ <%= link_to 'Authentications', authentications_path %> |
+ <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+
+ Looping through your statuses:<br />
+	<ul>
+
+	<% @my_status.each do |status| %>
+	<%= status["message"] %> (<i><%=status["updated_time"]%></i>)<hr>
+	<% end %>
+	</ul>

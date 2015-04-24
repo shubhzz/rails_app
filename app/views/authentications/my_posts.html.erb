@@ -1,0 +1,27 @@
+<%= link_to "Back", home_path %>
+<% if @fb_feed %>
+	<table border="1">
+		<thead><tr><th><h2>My Facebook Posts </h2></th><tr></thead>
+		<tbody>
+		<% JSON.parse(@fb_feed.to_json).each do |f| %>
+
+		<% date = DateTime.parse("#{f['updated_time']}") %>
+		<% formatted_date = date.strftime('%a %b %d %H:%M:%S %Z %Y') %> 
+				<tr><td><b style="color: #800000"><%= f['message'] %></b> <b style="color: #2b91af">---<i>@ <%= formatted_date %></i></b></td></tr>
+		<% end %>
+		</tbody>
+	</table>
+<% end %>
+
+<% if @twit_feed %>
+	<table border="1">
+		<thead><tr><th><h2>My Tweets </h2></th><tr></thead>
+		<tbody>
+		<% JSON.parse(@twit_feed.to_json).each do |t| %>
+				<% date = DateTime.parse("#{t['created_at']}") %>
+				<% formatted_date = date.strftime('%a %b %d %H:%M:%S %Z %Y') %> 
+				<tr><td><b style="color: #800000"><%= t['text'] %></b> <b style="color: #2b91af">---<i>@ <%= formatted_date %></i></b></td></tr>
+		<% end %>
+		</tbody>
+	</table>
+<% end %>
